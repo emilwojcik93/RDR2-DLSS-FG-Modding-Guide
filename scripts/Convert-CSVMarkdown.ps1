@@ -101,13 +101,12 @@ if ($extension -eq ".md") {
 
     # Write the extracted links to the Markdown file
     $markdownContent = @()
-    $markdownContent += "| No | Hyperlink | Installed | Check |"
-    $markdownContent += "|----|------------|-----------|-------|"
+    $markdownContent += "| No | Hyperlink | Check |"
+    $markdownContent += "|----|------------|-------|"
     $count = 1
     foreach ($row in $csvContent) {
-        $installed = if ($row.PARAGRAPH -match '\d') { "[x]" } else { "[ ]" }
-        $check = if ($row.Step -match '\d') { "[x]" } else { "[ ]" }
-        $markdownContent += "| $count | [$($row.TITLE)]($($row.URL)) | $installed | $check |"
+        $check = if ($row.Step -match '\d') { ":heavy_check_mark:" } else { "" }
+        $markdownContent += "| $count | [$($row.TITLE)]($($row.URL)) | $check |"
         $count++
     }
     $markdownContent | Out-File -FilePath $outputFile -Encoding utf8
