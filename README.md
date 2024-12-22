@@ -1,10 +1,15 @@
 # RDR2 DLSS FG Modding Guide
 
+## Prerequisites
+- Ensure you are using [Graphic API DirectX 12](https://steamcommunity.com/app/1174180/discussions/0/3762229949248826089/). DLSS-Enabler and OptiScaler require DX12.
+- Do not use any upscaled textures mods as they often require Vulkan. DX12 has issues handling large textures, leading to crashes.
+
 ## Description
 This repository provides a comprehensive guide for enhancing Red Dead Redemption 2 with NVIDIA's Deep Learning Super Sampling (DLSS) and Frame Generation (FG) technology. It includes detailed installation instructions, recommended mods, and troubleshooting tips to optimize your gaming experience.
 
 ## Table of Contents
 - [RDR2 DLSS FG Modding Guide](#rdr2-dlss-fg-modding-guide)
+  - [Prerequisites](#prerequisites)
   - [Description](#description)
   - [Table of Contents](#table-of-contents)
   - [ScriptHookRDR2 V2](#scripthookrdr2-v2)
@@ -16,9 +21,9 @@ This repository provides a comprehensive guide for enhancing Red Dead Redemption
   - [DLSS-Enabler](#dlss-enabler)
     - [Purpose](#purpose-2)
     - [Installation](#installation-2)
-  - [OptiScaler](#optiscaler)
+  - [OptiScaler (Deprecated)](#optiscaler-deprecated)
     - [Purpose](#purpose-3)
-    - [Installation](#installation-3)
+    - [Installation (Deprecated)](#installation-deprecated)
   - [Stutter Fix](#stutter-fix)
     - [Purpose](#purpose-4)
     - [How to Identify Which Version to Install for Your PC Config](#how-to-identify-which-version-to-install-for-your-pc-config)
@@ -51,21 +56,45 @@ Lenny's Mod Loader (LML) is a robust tool for managing and installing mods in Re
 DLSS-Enabler is a tool that enables NVIDIA's Deep Learning Super Sampling (DLSS) technology in games that do not natively support it. DLSS utilizes AI to upscale lower-resolution images to higher resolutions, thereby improving performance while maintaining visual quality.
 
 > [!NOTE]
-> I am using the `winmm.dll` installation type instead of `version.dll` because some of the ASI/LML loaders are improperly recognized, which might lead to game crashes. However, in general, `version.dll` works with the mod setup that I am using.
+> Ensure you are using [Graphic API DirectX 12](https://steamcommunity.com/app/1174180/discussions/0/3762229949248826089/) as DLSS-Enabler and OptiScaler require DX12. Do not use any upscaled textures mods as they often require Vulkan and DX12 has issues handling large textures, leading to crashes.
 
 ### Installation
-1. Copy the root path where the game is installed (you can use the script `.\scripts\rdr2-helper.ps1 -FindLocation`).
-2. Paste the game path in "Setup - DLSS Enabler".
-3. Install the main DLSS Enabler files (game dependent) - "Install as a winmm.dll file (if version.dll didn't work)".
+1. Uninstall the current mod and remove all related artifacts via `uninstall.exe` in the RDR2 game root path.
+2. Remove your [RDR2 settings](https://www.pcgamingwiki.com/wiki/Red_Dead_Redemption_2#Configuration_file.28s.29_location).
+3. Start the game, go to in-game settings, and perform auto configuration (ensure Rockstar Launcher does not restore cloud settings by disabling cloud sync in the Launcher).
+4. Enable DLSS with the preset ultra performance or performance via the in-game settings panel.
+5. In the "Advanced" settings, set [Graphic API to DirectX 12](https://steamcommunity.com/app/1174180/discussions/0/3762229949248826089/).
+6. Close the game.
+7. Install [artur-graniszewski/DLSS-Enabler 3.03.000.0 TRUNK](https://github.com/artur-graniszewski/DLSS-Enabler/releases/tag/3.03.000.0-trunk).
+8. Start the game again and check DLSS-Enabler and OptiScaler settings via the overlay `Insert` hotkey.
 
-## [OptiScaler](https://github.com/cdozdil/OptiScaler.git)
+Alternatively, you can change the Graphics API by editing the `settings.xml` file:
+1. Navigate to the configuration file location:
+   ```
+   C:\Users\<YourUsername>\Documents\Rockstar Games\Red Dead Redemption 2\Settings
+   ```
+2. Open the `system.xml` file with a text editor like Notepad.
+3. Find the line that specifies the graphics API:
+   ```xml
+   <API>kSettingAPI_Vulkan</API>
+   ```
+4. Change `Vulkan` to `DX12`:
+   ```xml
+   <API>kSettingAPI_DX12</API>
+   ```
+5. Save the file and close the text editor.
+6. Launch the game.
+
+For more details, you can refer to this guide: [Change RDR2 Graphics API (Vulkan/DX12) using Notepad](https://www.techrbun.com/change-rdr2-graphics-api-vulkan-dx12-using-notepad/).
+
+## [OptiScaler](https://github.com/cdozdil/OptiScaler.git) (Deprecated)
 ### Purpose
 OptiScaler is a tool designed to enhance the visual quality and performance of games by optimizing the scaling algorithms. It supports FrameGenerator (FG) and provides superior upscaling techniques.
 
 > [!NOTE]
 > FrameGenerator (FG) is currently an experimental feature and is available in the pre-release. You can find the pre-release versions in the [tags](https://github.com/cdozdil/OptiScaler/tags).
 
-### Installation
+### Installation (Deprecated)
 1. Download the release with FG support from the repository.
 2. Extract the release archive and rename "nvngx.dll" to "dlss-enabler-upscaler.dll".
 3. Copy and overwrite the entire contents of the release directory into the game root directory.
