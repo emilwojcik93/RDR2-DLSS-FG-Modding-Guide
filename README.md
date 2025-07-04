@@ -141,7 +141,8 @@ DLSS-Enabler enables NVIDIA's Deep Learning Super Sampling (DLSS) technology in 
 2. Find your RDR2 installation path (you can use the script `.\scripts\rdr2-helper.ps1 -FindLocation`)
 3. Extract the trunk release files to your game directory
 4. Install as `winmm.dll` instead of `version.dll` to avoid conflicts with ASI/LML loaders
-5. Configure DLSS settings in-game before enabling the mod
+5. Configure DLSS settings in-game before enabling the mod (optional, it might be configured via in-game overlay)
+6. Remove `nvngx.ini` in game root directory (DLSS-Enabler with Optiscaler is using `OptiScaler.ini` file to store config state)
 
 > [!NOTE]
 > Using `winmm.dll` installation method prevents crashes with ASI/LML loaders. While `version.dll` generally works, `winmm.dll` is more stable with the current mod setup.
@@ -165,7 +166,7 @@ OptiScaler enhances visual quality and performance through optimized scaling alg
 1. Download the latest [OptiScaler Nightly Build](https://github.com/optiscaler/OptiScaler/releases/tag/nightly)
    - Direct link to current version: [OptiScaler v0.7.7-pre12_20250630](https://github.com/optiscaler/OptiScaler/releases/download/nightly/OptiScaler_v0.7.7-pre12_20250630.7z)
 2. Extract the release archive
-3. Locate `nvngx.dll` in the OptiScaler files
+3. Locate `dlss-enabler-upscaler.dll` in the OptiScaler files
 4. Rename `nvngx.dll` to `dlss-enabler-upscaler.dll`
 5. Copy and replace the existing `dlss-enabler-upscaler.dll` in your RDR2 game directory
 6. Run `DlssOverrides\EnableSignatureOverride.reg` if available
